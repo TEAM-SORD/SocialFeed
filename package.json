@@ -1,0 +1,25 @@
+{
+  "name": "SocialFeed",
+  "version": "1.0.0",
+  "description": "Twitter and Instagram API App with NodeJS WebServer",
+  "main": "myServer.js",
+  "dependencies": {
+    "ecstatic": "^0.5.8",
+    "tape": "^3.5.0",
+    "twitter": "^1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TEAM-SORD/SocialFeed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TEAM-SORD/SocialFeed/issues"
+  },
+  "homepage": "https://github.com/TEAM-SORD/SocialFeed"
+}
