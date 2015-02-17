@@ -1,8 +1,9 @@
- language: node_js
+language: node_js
 node_js:
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
-  - iojs
+- '0.12'
+- '0.11'
+- iojs
+deploy:
+  provider: heroku
+  api_key:
+    secure: H8sfvqB0QHl1lyk4yizGxHfr0ETfW6IiuzCI+HRMPn7+BTyVYC7sgQdKSVF5kxoG8oQ48LiHGvUX2AbaqfjXJMumwAGSvxep3rBzZvA1aiuFEM+xAM2eS4MCcEkn/Qas2+AfNNKwhOdhqpsdoKiezQQhR3QwLEN3mayi13GoPlM=
