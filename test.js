@@ -1,5 +1,4 @@
 var test = require( 'tape');
-var script = require( './script.js' );
 
 test( 'easy pass test', function( t) {
 	
