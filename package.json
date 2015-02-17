@@ -10,7 +10,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node ./test.js"
+    "test": "node /home/sarah/SocialFeed/test.js"
   },
   "repository": {
     "type": "git",
