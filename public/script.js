@@ -11,7 +11,8 @@ $(document).ready( function (){
 		})
 		.done(function(data){
 			console.log( "In done callback. Data: " + data );
-			insertNewTweetToHTML( data );			
+			if( typeof ( data ) !== 'string' ) 
+				insertNewTweetToHTML( data );			
 		});
 	});
 });
