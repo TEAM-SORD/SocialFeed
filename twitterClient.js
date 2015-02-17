@@ -26,6 +26,7 @@ catch( err ){
 };
 try{
 if( envVars.consumer_key === undefined ){
+		console.log( 'envVars undefined');
 	envVars.consumer_key = "I4oWDpdFYlYUCRYDNFL4CzDrt";
 	envVars.consumer_secret = "hqcxswsmJyR5FYh5M0Ku5guICqbq6PtoU0d1UAef55iClyzxRH";
 	envVars.access_token_key = "21026937-s69iBSczgPOxl026rMxpuivKU3mmyRsqtrk2KcKrF";

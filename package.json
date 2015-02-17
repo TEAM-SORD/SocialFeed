@@ -2,7 +2,7 @@
   "name": "SocialFeed",
   "version": "1.0.0",
   "description": "Twitter and Instagram API App with NodeJS WebServer",
-  "main": "myServer.js",
+  "main": "myServerCSS.js",
   "dependencies": {
     "ecstatic": "^0.5.8",
     "tape": "^3.5.0",
