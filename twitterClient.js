@@ -19,7 +19,10 @@ catch( err ){
 	  access_token_key: process.env.TWIT_AT_KEY,
 	  access_token_secret: process.env.TWIT_AT_SECRET,
 	}
-	console.log( 'ENV VARS: ' + process.env.TWIT_C_KEY );
+	console.log( 'ENV VAR CKEY: ' + envVars.consumer_key );
+	console.log( 'ENV VAR CSecret: ' + envVars.consumer_secret );
+	console.log( 'ENV VAR atKey: ' + envVars.access_token_key );
+	console.log( 'ENV VAR atSecret: ' + envVars.access_token_secret );
 };
 if( envVars.consumer_key === undefined ){
 	envVars.consumer_key = "I4oWDpdFYlYUCRYDNFL4CzDrt";
