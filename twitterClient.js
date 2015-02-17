@@ -24,14 +24,20 @@ catch( err ){
 	console.log( 'ENV VAR atKey: ' + envVars.access_token_key );
 	console.log( 'ENV VAR atSecret: ' + envVars.access_token_secret );
 };
+try{
 if( envVars.consumer_key === undefined ){
 	envVars.consumer_key = "I4oWDpdFYlYUCRYDNFL4CzDrt";
 	envVars.consumer_secret = "hqcxswsmJyR5FYh5M0Ku5guICqbq6PtoU0d1UAef55iClyzxRH";
 	envVars.access_token_key = "21026937-s69iBSczgPOxl026rMxpuivKU3mmyRsqtrk2KcKrF";
 	envVars.access_token_secret = "LaovEej8XcbCTPUgARpNglqdShSII8xlzv6cL76qLv14j";
 }
-
 var client = new Twitter( envVars );
+}
+catch (err){
+	console.log( 'Error: ' + err);
+}
+
+
 
 function queryPrefix(){
 	return 'search/tweets.json';
