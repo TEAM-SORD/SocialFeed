@@ -1,5 +1,4 @@
 
-var apiConfig = require( './config.json');
 var url = require( 'url');
 var ig = require('instagram-node').instagram();
 var http = require('http');
