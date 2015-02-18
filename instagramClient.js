@@ -3,8 +3,8 @@ var Twitter = require( 'twitter');
 var url = require( 'url');
 var ig = require('instagram-node').instagram();
 var http = require('http');
-var mongoclient = require( 'mongodb').mongoclient;
-var database = 'mongodb://localhost:27017/instagramDB';
+//var mongoclient = require( 'mongodb').mongoclient;
+//var database = 'mongodb://localhost:27017/instagramDB';
 
 var twitEnv, instaEnv;
 try{
