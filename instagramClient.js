@@ -3,6 +3,8 @@ var Twitter = require( 'twitter');
 var url = require( 'url');
 var ig = require('instagram-node').instagram();
 var http = require('http');
+var mongoclient = require( 'mongodb').mongoclient;
+var database = 'mongodb://localhost:27017/instagramDB';
 
 var twitEnv, instaEnv;
 try{
@@ -45,14 +47,19 @@ if( twitEnv.consumer_key === undefined || instaEnv.client_id === undefined){
 	console.log( 'Environment Vars Undefined');
 }
 else {
-	client = new Twitter( twitEnv );
+	//client = new Twitter( twitEnv );
 	//instagram
 	ig.use( instaEnv );
 }
 
 module.exports = {
 	extractDataFromResponse: function (medias){
-		var tagsData = JSON.stringify( medias.map( function (media) {
+		var tagsData;
+		if( medias === undefined ) {
+			config.log( 'No Media found');
+			return tagsData;
+		};
+		tagsData = JSON.stringify( medias.map( function (media) {
 			//console.log( 'media: ' + JSON.stringify( media.caption ));
 			return { 'username': media.user.username,
 					 'link'    : media.link,
