@@ -1,6 +1,6 @@
 var Twitter = require( 'twitter');
-
 var url = require( 'url');
+
 var envVars, client;
 try{
 	var apiConfig = require( './config.json');
