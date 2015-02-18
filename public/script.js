@@ -44,5 +44,7 @@ function insertNewInstaToHTML ( instas ) {
 		return resultHTML;
 	});
 
+	$('#resultsarea').empty();
+
 	$('#resultsarea').append( results.join("") );
 };

@@ -131,3 +131,7 @@ test( 'extract data from instagram response', function (t) {
 });
 
 
+// TO TEST:
+// TEST WHEN CAPTION === NULL
+
+
