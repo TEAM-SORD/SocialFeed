@@ -17,7 +17,7 @@ catch( err ){
 	  client_id: process.env.INSTA_CID,
 	  client_secret: process.env.INSTA_SECRET,
 	};
-	console.log( 'ENV VAR Client ID: ' + environment.client_id );
+	console.log( 'ENV VAR Client ID: ' + process.env.INSTA_CID );
 	console.log( 'ENV VAR Client Secret: ' + environment.client_secret );
 };
 // if Heroku Env Vars weren't set then client will be nothing
