@@ -32,7 +32,7 @@ catch( err ){
 
   	instaEnv = {
 	  client_id: process.env.INSTA_CID,
-	  client_secret: process.env.INSTA_CSECRET
+	  client_secret: process.env.INSTA_SECRET
 
 	};
 	console.log( 'ENV VAR CKEY: ' + twitEnv.consumer_key );
