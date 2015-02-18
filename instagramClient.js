@@ -50,36 +50,10 @@ else {
 	ig.use( instaEnv );
 }
 
-// try{
-// 	var apiConfig = require( './config.json');
-// 	environment = {
-// 		client_id: apiConfig.instaCID,
-// 		client_secret: apiConfig.instaCSecret
-// 	};	
-// }
-// catch( err ){
-// 	// cannot find config.json so try for Heroku Env Vars instead
-//  	environment = {
-// 	  client_id: process.env.TWIT_C_KEY,
-// 	  client_secret: process.env.TWIT_C_SECRET,
-// 	};
-// 	console.log( 'ENV VAR Client ID: ' + process.env.TWIT_C_KEY );
-// 	console.log( 'ENV VAR Client Secret: ' + environment.client_secret );
-// };
-// // if Heroku Env Vars weren't set then client will be nothing
-// if( environment.client_id === undefined ){
-// 	console.log( 'Environment Variables Undefined');
-// 	environment = undefined;
-// }
-// else {
-// 	//instagram
-// 	ig.use( environment );
-// };
-
 module.exports = {
 	extractDataFromResponse: function (medias){
 		var tagsData = JSON.stringify( medias.map( function (media) {
-			console.log( 'media: ' + JSON.stringify( media.caption ));
+			//console.log( 'media: ' + JSON.stringify( media.caption ));
 			return { 'username': media.user.username,
 					 'link'    : media.link,
 					 'caption' : ( media.caption === null )? "": media.caption.text,
@@ -103,17 +77,24 @@ module.exports = {
 	    	console.log( "In function queryHandler");
 	    	// make a call to the database and see if there is any data for our query 
 	    	// var data = {};
+	    	// var dbError;
 	    	// data = lookupQuery( query );
 	    	// if( data.isFresh() ) { 
 	    	// 	response.end( data );
 	    	// }
 	    	// else {
 	    		ig.tag_media_recent( /*reqURL.query.*/query , function(err, medias, pagination, remaining, limit) {	    		
-			    	console.log( "In callback of tag_media_recent");
-			    	// 
+			    	console.log( "In callback of tag_media_recent");			    	
 					var responseData = module.exports.extractDataFromResponse( medias );
-					console.log(err);
-					if(err) throw err;
+					// add extracted data to database and then return is on the response
+					// data = addToDatabase( responseData, dbError);
+					// if( data === undefined ) {
+					// 	console.log( 'Error adding data to database: ' + dbError );
+					// };
+					if(err) {
+						console.log(err);
+						throw err;
+					};
 					response.writeHead( 200, {'Content-Type': 'text/plain'});
 					response.end(responseData);
 					if( callback !== undefined ) {
