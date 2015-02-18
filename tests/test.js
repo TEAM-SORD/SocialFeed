@@ -1,7 +1,7 @@
 var url = require( 'url');
 var test = require( 'tape');
 // var script = require( './script' );
-var instagramClient = require( './instagramClient');
+var instagramClient = require( '../instagramClient');
 
 // test( 'change response data to html', function( t) {
 // 	var instagramData = { 
