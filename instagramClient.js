@@ -14,10 +14,10 @@ try{
 catch( err ){
 	// cannot find config.json so try for Heroku Env Vars instead
  	environment = {
-	  client_id: process.env.INSTA_CID,
-	  client_secret: process.env.INSTA_SECRET,
+	  client_id: process.env.TWIT_C_KEY,
+	  client_secret: process.env.TWIT_C_SECRET,
 	};
-	console.log( 'ENV VAR Client ID: ' + process.env.INSTA_CID );
+	console.log( 'ENV VAR Client ID: ' + process.env.TWIT_C_KEY );
 	console.log( 'ENV VAR Client Secret: ' + environment.client_secret );
 };
 // if Heroku Env Vars weren't set then client will be nothing
