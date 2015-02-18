@@ -23,6 +23,7 @@ catch( err ){
 // if Heroku Env Vars weren't set then client will be nothing
 if( environment.client_id === undefined ){
 	console.log( 'Environment Variables Undefined');
+	environment = undefined;
 }
 else {
 	//instagram
@@ -30,9 +31,8 @@ else {
 };
 
 module.exports = {
-	extractDataFromResponse: function( medias ){
-		console.log(medias);
-		var tagsData = JSON.stringify( medias.map( function(media) {
+	extractDataFromResponse: function (medias){
+		var tagsData = JSON.stringify( medias.map( function (media) {
 			return { 'username': media.user.username,
 					 'link'    : media.link,
 					 'caption' : media.caption.text,
@@ -41,24 +41,40 @@ module.exports = {
     	}));
     	return tagsData;
 	},
-	requestHandler: function( req, res ) {
-		var reqURL = url.parse(req.url, true);
-		var responseData;
-		if( ig === undefined ){
+	requestHandler: function( request, response , callback ) {
+		console.log( 'Request url: ' + request.url );
+		var reqURL = url.parse( request.url, true );
+		module.exports.queryHandler( reqURL.query.query, response, callback );
+	},
+	queryHandler: function( query, response, callback){
+		if( environment === undefined ){
 	    	console.log( 'No Twitter Client object. Issue setting Auth Keys.')
-	    	res.writeHead( 200, {'Content-Type': 'text/plain'});
-	    	res.end( 'Undefined Twitter client object');
+	    	response.writeHead( 200, {'Content-Type': 'text/plain'});
+	    	response.end( 'Undefined Twitter client object');
 	    }
 	    else {	
-	    	ig.tag_media_recent( reqURL.query.query , function(err, medias, pagination, remaining, limit) {	    		
-				responseData = module.exports.extractDataFromResponse( medias );
-//				console.log( responseData);
+	    	console.log( "In function queryHandler");
+	    	ig.tag_media_recent( /*reqURL.query.*/query , function(err, medias, pagination, remaining, limit) {	    		
+		    	console.log( "In function queryHandler");
+				var responseData = module.exports.extractDataFromResponse( medias );
 				console.log(err);
 				if(err) throw err;
-				res.write(responseData);
-				res.end();
+				response.writeHead( 200, {'Content-Type': 'text/plain'});
+				response.end(responseData);
+				if( callback !== undefined ) {
+					callback( response );
+				};
 			});
 		};
+	},
+
+	handleMedia: function(err, medias, pagination, remaining, limit, response, callback) {	    		
+    	console.log( "In function queryHandler");
+		var responseData = module.exports.extractDataFromResponse( medias );
+		console.log(err);
+		if(err) throw err;
+		response.end(responseData);
+		if( callback !== undefined ) callback( response );
 	}
 };
 

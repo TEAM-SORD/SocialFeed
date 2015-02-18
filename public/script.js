@@ -9,8 +9,7 @@ $(document).ready( function (){
 		})
 		.done(function (data) {
 			console.log( "In done callback. Data: " + data );
-			//if( typeof ( data ) !== 'string' ) 
-				insertNewInstaToHTML( JSON.parse(data) );
+			insertNewInstaToHTML( JSON.parse(data) );
 		});
 	});
 	$('#searchvalue').keypress(function(e){
