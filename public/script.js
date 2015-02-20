@@ -15,6 +15,7 @@ $(document).ready( function (){
 	$('#searchvalue').keypress(function(e){
         if(e.which == 13){//Enter key pressed
             $('#search').click();//Trigger search button click event
+            return false;
         }
     });
 });
@@ -40,7 +41,7 @@ function insertNewInstaToHTML ( instas ) {
  	console.log('instas: ', typeof(instas));
 	results = instas.map( function( element, index ){
 		resultHTML = formatInstaToHTML( element );
-		console.log(resultHTML);
+		//console.log(resultHTML);
 		return resultHTML;
 	});
 

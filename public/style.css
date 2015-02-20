@@ -1,12 +1,30 @@
 body {
-	background-color: #C0DEED;
+	background-color: #EDEEEF;
 	font-size: 20px;
 	font-style: "Liberation Sans", Helvetica, Arial, sans-serif;
 }
 
+.navbar {
+  height: 43px;
+  border-bottom: 1px solid #1c5380;
+  border-bottom-color: rgba(4,40,71,.8);
+  -webkit-box-shadow: 0 1px 0 rgba(111,151,182,.5)inset,0 -1px 0 rgba(111,151,182,.2)inset,0 1px 1px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 1px 0 rgba(111,151,182,.5)inset,0 -1px 0 rgba(111,151,182,.2)inset,0 1px 1px rgba(0,0,0,.2);
+  box-shadow: 0 1px 0 rgba(111,151,182,.5)inset,0 -1px 0 rgba(111,151,182,.2)inset,0 1px 1px rgba(0,0,0,.2);
+  background-color: #517fa4;
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),-webkit-gradient(linear,left top,left bottom,from(#517fa4),to(#306088));
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),-webkit-linear-gradient(top,#517fa4,#306088);
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),-moz-linear-gradient(top,#517fa4,#306088);
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),-o-linear-gradient(top,#517fa4,#306088);
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),-ms-linear-gradient(top,#517fa4,#306088);
+  background-image: url(//instagramstatic-a.akamaihd.net/bluebar/68914d6/images/shared/noise-1.png),linear-gradient(top,#517fa4,#306088);
+  background-position: 50% 50%;
+  z-index: 100;
+}
+
 #heading {
     height: 5em;
-    position: relative 
+    position: relative
 }
 #heading #twittericon {
 	height: 40px;
@@ -19,21 +37,22 @@ body {
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%)
 }
 #entryform{
 	height: 5em;
 	position: relative
 }
 #searchvalue {
-	height: 25px;
+	height: 35px;
 	width: 196px;
-	
+	font-size: 1em;
+  text-align: center;
 	position: absolute;
-	top: 20%;
+	top: 30%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%)
 }
 #search {
 	background-color: #4682B4;
@@ -41,26 +60,28 @@ body {
 	width: 200px;
 	height: 30px;
 	position: absolute;
-	top: 50%;
+	top: 60%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%)
 }
 
 #resultsarea{
-	background-color: #ffffff;
+	background-color: #e0e1e2;
 	float: left;
 	clear: both;
-	height: 5000px;
-	width: 800px;
-	margin-left: 200px;
+	height: 100%;
+	width: 100%;
+	margin-left: auto;
+  margin-right: auto;
 	margin-top: 20px;
 	border-radius: 3px 3px 0 0;
 }
 
 #results{
-	float: left;
 	clear: both;
+  margin: auto;
+  display: block;
 }
 
 #results .tweettext {
@@ -80,4 +101,18 @@ body {
 .tweetdiv {
 	padding-left: 25px;
 	padding-right: 25px;
+}
+
+img {
+  height: 80%;
+  width: 80%;
+  overflow: hidden;
+  margin: auto;
+  display: block;
+}
+
+p {
+  text-align: center;
+  font-family: 'Oswald',arial narrow,sans-serif;
+  padding: 1%;
 }
