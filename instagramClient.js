@@ -141,10 +141,12 @@ module.exports = {
 	    		console.log( 'Data is fresh so resend fron the database');
 	    		response.writeHead( 200, {'Content-Type': 'text/plain'});
 	    		response.end( JSON.stringify( documents ));
-	    		return;
-	   //  		if( callback !== undefined ) {
-				// 	callback( JSON.stringify( documents ) );
-				// };
+	    		
+	    		if( callback !== undefined ) {
+					callback( response );
+					db.close();
+				};
+				return;
 	    	};
 	    	// Need to call the INSTAGRAM API to get fresh data:	
     		ig.tag_media_recent( query , function(err, medias, pagination, remaining, limit) {	    		
@@ -171,7 +173,9 @@ module.exports = {
 				response.end(responseData);
 			
 				if( callback !== undefined ) {
-					callback( responseData );
+					callback( response );
+					db.close();
+					return;
 				};
 				
 				if( medias !== undefined && medias.length >= 1 ) {
@@ -182,28 +186,22 @@ module.exports = {
 		});
 	},
 	databaseUpdates: function ( query, responseData ) {
-
 		// add extracted data to database and then return is on the response
 		try{
 			// if there's data in the database then it will need to be replaced
 			module.exports.lookupQueryInDB( query, {}, function( docs ){ 								
-				//if( docs && docs.length > 0 ) {
-					console.log( "In lookupQueryInDB's callback");
-					module.exports.removeDocsFromCollection( docs, query, function( nRemoved ) {
-						console.log( "In removeDocsFromCollection's callback");
-						if( docs && docs.length !== nRemoved ) {
-							console.log( 'Not all of the docs were removed!');
-						}
-						else if ( docs ){
-							console.log( 'All docs have been removed!' );
-						};
-						// and then new data added
-						module.exports.addToCollection( responseData, query );						
-					});
-				// }
-				// else{
-				// 	console.logs( 'No documents found to remove');
-				// };
+				console.log( "In lookupQueryInDB's callback");
+				module.exports.removeDocsFromCollection( docs, query, function( nRemoved ) {
+					console.log( "In removeDocsFromCollection's callback");
+					if( docs && docs.length !== nRemoved ) {
+						console.log( 'Not all of the docs were removed!');
+					}
+					else if ( docs ){
+						console.log( 'All docs have been removed!' );
+					};
+					// and then new data added
+					module.exports.addToCollection( responseData, query );						
+				});
 			});
 		}
 		catch( error ){
@@ -226,15 +224,11 @@ module.exports = {
 	},
 	lookupQueryInDB: function( query, projection, callback ) {
 		var err, docs;
-		// if( !DATABASE_CONNECTION ){
-		// 	console.log( 'In lookupQueryInDB - Database Not Connected!');
-		// 	return;
-		// };
 		console.log( 'In lookupQueryInDB');
 		db.MediaResults.find( { queriedTerm: query }, projection, function(err, docs) {
     		// docs is an array of all the documents in mycollection
     		if( err ){
-    			console.log( err );
+    			console.log( 'Error: ' + err );
     		};
     		console.log( ( docs && docs.length > 0 ) ? 'Any Documents found?: ' + docs.length : 'No Documents found.');
 			callback( docs ); 
@@ -272,17 +266,11 @@ module.exports = {
 				};
 	},
 	addToCollection: function( responseData, query ) {
-		// if( !DATABASE_CONNECTION ) {
-		// 	console.log( "In addToCollection - Database Not Connected!");
-		// 	return;
-		// };
 		var res;
 		var apiResponse = JSON.parse( responseData );
 		console.log( 'in addToCollection');
 		var tobeinserted = apiResponse.map( function( element, index ) {
 			element.queriedTerm = query;
-			//var timeNow = moment(moment(), 'YYYY-M-DD HH:mm:ss');
-			//console.log( 'timeNow: ' + timeNow);
 			element.dateTimeInserted = moment(moment(), 'YYYY-M-DD HH:mm:ss');
 			return element;
 		});
@@ -291,12 +279,6 @@ module.exports = {
 		// do a bulk insert
 		var bulk = db.MediaResults.initializeOrderedBulkOp();
 		tobeinserted.forEach( function( element, index ) {
-			// console.log( 'Before insert index[' + index + '] of: ' + element.queriedTerm );
-			// console.log( 'dateTimeInserted: ' + element.dateTimeInserted );
-			// console.log( 'Link: ' + element.link );
-			// console.log( 'caption: ' + element.caption );
-			// console.log( 'image: ' + element.image );
-			// console.log( 'Username: ' + element.username);
 			bulk.insert(element);
 		});
 		var results = bulk.execute( function( err, res ) {
@@ -304,7 +286,6 @@ module.exports = {
 			if( err ) {
 				console.log( 'Error: ' + err )
 			};
-//			console.log( res );
 			return res;
 		});
 		console.log( 'Inserted documents, result: ' + res );
